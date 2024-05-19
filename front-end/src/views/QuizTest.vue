@@ -88,6 +88,19 @@
             })
 
             const submit = () => {
+
+                // submitQuiz(subjectId, classId, userId.value, questions.value).then((res) => {
+                //     console.log("res", res)
+                //     Swal.fire(res, "", "success")
+
+                // }).catch((err) => {
+                //     Swal.fire({
+                //         icon: "error",
+                //         title: "Oops...",
+                //         text: err.response.data
+
+                //     });
+                // })
                 if (!checkBeforeSubmit()) {
                     Swal.fire({
                         title: "Bạn chưa chọn hết đáp án",
@@ -99,12 +112,13 @@
                             submitQuiz(subjectId, classId, userId.value, questions.value).then((res) => {
                                 console.log(res)
                                 Swal.fire(res, "", "success")
-                                this.$router.go(-1);
+
+
                             }).catch((err) => {
                                 Swal.fire({
                                     icon: "error",
                                     title: "Oops...",
-                                    text: err.response.data,
+                                    text: err.response.data
 
                                 });
                             })
@@ -112,7 +126,20 @@
                         }
                     });
 
+                } else {
+                    submitQuiz(subjectId, classId, userId.value, questions.value).then((res) => {
+                        console.log(res)
+                        Swal.fire(res, "", "success")
 
+
+                    }).catch((err) => {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: err.response.data
+
+                        });
+                    })
 
                 }
 
