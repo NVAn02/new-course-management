@@ -45,6 +45,8 @@
                 </div>
             </div>
             <div class="mt-5">
+                
+                
                 <button @click="submit" class="btn btn-primary">
                     Submit</button>
             </div>
@@ -57,13 +59,13 @@
 </template>
 <script>
     import { ref } from "vue";
-    import { useRoute } from 'vue-router'
+    import { useRoute,useRouter  } from 'vue-router'
     import { useQuiz } from "@/composables/useQuiz";
     import Swal from 'sweetalert2';
     export default {
         name: "quiz-page",
         setup() {
-
+            const router = useRouter();
 
             const userId = ref(localStorage.getItem("userId"));
             const route = useRoute()
@@ -112,6 +114,7 @@
                             submitQuiz(subjectId, classId, userId.value, questions.value).then((res) => {
                                 console.log(res)
                                 Swal.fire(res, "", "success")
+                                goBack()
 
 
                             }).catch((err) => {
@@ -130,6 +133,7 @@
                     submitQuiz(subjectId, classId, userId.value, questions.value).then((res) => {
                         console.log(res)
                         Swal.fire(res, "", "success")
+                        goBack()
 
 
                     }).catch((err) => {
@@ -162,6 +166,9 @@
                     return true
                 }
             }
+            const goBack = () => {
+                router.back();
+            };
             return {
                 questions, submit, subjectId, classId, userId, totalQuestion
             }
